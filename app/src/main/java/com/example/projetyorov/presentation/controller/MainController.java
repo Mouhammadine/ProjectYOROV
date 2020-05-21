@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.example.projetyorov.Constants;
+import com.example.projetyorov.Injection;
 import com.example.projetyorov.data.PokeApi;
 import com.example.projetyorov.presentation.model.Pokemon;
 import com.example.projetyorov.presentation.model.RestPokemonResponse;
@@ -50,15 +51,7 @@ public class MainController {
     }
     private void makeApiCall() {
 
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        PokeApi pokeApi = retrofit.create(PokeApi.class);
-
-        Call<RestPokemonResponse> call = pokeApi.getPokemonResponse();
+        Call<RestPokemonResponse> call = Injection.getPokeApi().getPokemonResponse();
         call.enqueue(new Callback<RestPokemonResponse>() {
 
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.projetyorov.Constants;
 import com.example.projetyorov.R;
+import com.example.projetyorov.Singletons;
 import com.example.projetyorov.data.PokeApi;
 import com.example.projetyorov.presentation.controller.MainController;
 import com.example.projetyorov.presentation.model.Pokemon;
@@ -47,12 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
         controller = new MainController(
                 this,
-                new GsonBuilder()
-                .setLenient()
-                .create(),
-        getSharedPreferences("application_YOROV", Context.MODE_PRIVATE)
-        );
-        controller.onStart();
+                Singletons.getGson(),
+                Singletons.getSharedPreferencesInstance(getApplicationContext()));
+
+                controller.onStart();
     }
 
 
