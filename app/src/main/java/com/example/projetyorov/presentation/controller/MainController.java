@@ -5,7 +5,8 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.example.projetyorov.Constants;
-import com.example.projetyorov.Injection;
+import com.example.projetyorov.Singletons;
+import com.example.projetyorov.Singletons;
 import com.example.projetyorov.data.PokeApi;
 import com.example.projetyorov.presentation.model.Pokemon;
 import com.example.projetyorov.presentation.model.RestPokemonResponse;
@@ -51,7 +52,7 @@ public class MainController {
     }
     private void makeApiCall() {
 
-        Call<RestPokemonResponse> call = Injection.getPokeApi().getPokemonResponse();
+        Call<RestPokemonResponse> call = Singletons.getPokeApi().getPokemonResponse();
         call.enqueue(new Callback<RestPokemonResponse>() {
 
 
@@ -112,6 +113,7 @@ public class MainController {
 
 
     public void onItemClick(Pokemon pokemon){
+        view.navigateToDetails(pokemon);
 
     }
 
