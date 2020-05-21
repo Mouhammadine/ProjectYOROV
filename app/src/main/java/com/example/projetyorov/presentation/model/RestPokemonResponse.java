@@ -1,4 +1,4 @@
-package com.example.projetyorov;
+package com.example.projetyorov.presentation.model;
 
 
 import java.util.List;

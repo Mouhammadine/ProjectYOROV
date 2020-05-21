@@ -1,4 +1,4 @@
-package com.example.projetyorov;
+package com.example.projetyorov.presentation.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,12 +9,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.projetyorov.Constants;
+import com.example.projetyorov.R;
+import com.example.projetyorov.data.PokeApi;
+import com.example.projetyorov.presentation.model.Pokemon;
+import com.example.projetyorov.presentation.model.RestPokemonResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         String jsonPokemon = sharedPreferences.getString(Constants.KEY_POKEMON_LIST, null);
 
-        if(jsonPokemon== null){
+        if(jsonPokemon == null){
             return null;
 
         }else{
@@ -110,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
         Call<RestPokemonResponse> call = pokeApi.getPokemonResponse();
         call.enqueue(new Callback<RestPokemonResponse>() {
+
+
             @Override
             public void onResponse(Call<RestPokemonResponse> call, Response<RestPokemonResponse> response) {
                 if(response.isSuccessful() && response.body()!=null){
@@ -136,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveList(List<Pokemon> pokemonList) {
 
-        String jsonString=gson.toJson(pokemonList);
+        String jsonString = gson.toJson(pokemonList);
 
 
         sharedPreferences
